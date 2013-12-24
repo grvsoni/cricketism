@@ -1,0 +1,93 @@
+<%= form_for @club, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="row">
+  <div class="span2">
+    <div class="control-group">
+      <%= f.label :logo, image_tag(@club.logo.url(:medium), :class => "img-circle"), :class => 'control-label' %>
+    </div>
+  </div>
+  <div class="span7">
+    <%= render "shared/error_messages", :target => @club %>  
+    <div class="control-group">
+      <%= f.label :logo, "Profile Picture", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :logo %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :war_cry, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :war_cry, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :level_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :level_id, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :status, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :status, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :city, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :city, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :state, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :state, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :country, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :country, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :is_verified, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :is_verified, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :is_registered, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :is_registered, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :verification_date, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :verification_date, 
+                         :readonly => true,
+                         :class => 'text_field datepicker' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :registration_date, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :registration_date, 
+                         :readonly => true,
+                         :class => 'text_field datepicker' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  clubs_path, :class => 'btn' %>
+    </div>
+  </div>
+<% end %>

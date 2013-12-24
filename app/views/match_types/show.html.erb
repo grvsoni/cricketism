@@ -1,0 +1,41 @@
+<%- model_class = MatchType -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @match_type.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:max_over_batting) %>:</strong></dt>
+  <dd><%= @match_type.max_over_batting %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:max_run_batting) %>:</strong></dt>
+  <dd><%= @match_type.max_run_batting %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:max_over_bowling) %>:</strong></dt>
+  <dd><%= @match_type.max_over_bowling %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:innings) %>:</strong></dt>
+  <dd><%= @match_type.innings %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:balls_per_over) %>:</strong></dt>
+  <dd><%= @match_type.balls_per_over %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rebowl_noball) %>:</strong></dt>
+  <dd><%= @match_type.rebowl_noball %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:noball_runs) %>:</strong></dt>
+  <dd><%= @match_type.noball_runs %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:dismiss_on_wicket) %>:</strong></dt>
+  <dd><%= @match_type.dismiss_on_wicket %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:wicket_value) %>:</strong></dt>
+  <dd><%= @match_type.wicket_value %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_man_bat) %>:</strong></dt>
+  <dd><%= @match_type.last_man_bat %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              match_types_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_match_type_path(@match_type), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              match_type_path(@match_type),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

@@ -1,0 +1,8 @@
+<ul class="nav navbar-nav">
+  <%= tabs_tag :builder => MenuTabBuilder do |tab| %>
+    <%= tab.home 'Home', root_path %>
+    <%= tab.dashboard 'Dashboard', dashboard_path %>
+    <%= tab.about_us 'About', about_us_path %>
+    <%= tab.contact_us 'Contact Us', contact_us_path %>
+  <% end %>
+</ul>

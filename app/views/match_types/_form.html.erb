@@ -1,0 +1,75 @@
+<%= form_for @match_type, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= render "shared/error_messages", :target => @match_type %>  
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :max_over_batting, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :max_over_batting, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :max_run_batting, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :max_run_batting, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :max_over_bowling, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :max_over_bowling, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :innings, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :innings, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :balls_per_over, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :balls_per_over, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :rebowl_noball, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :rebowl_noball, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :noball_runs, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :noball_runs, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :dismiss_on_wicket, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :dismiss_on_wicket, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :wicket_value, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :wicket_value, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_man_bat, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_man_bat, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                match_types_path, :class => 'btn' %>
+  </div>
+<% end %>

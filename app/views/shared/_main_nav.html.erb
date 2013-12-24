@@ -1,0 +1,16 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/"><%= image_tag "logo.png", :size => "25x25", :style => "margin-top:-8px;" %> Cricketism</a>
+      <div class="container nav-collapse">
+        <%= render "shared/top_nav" %>
+        <%= render "shared/user_nav" %>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
