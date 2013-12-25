@@ -11,19 +11,19 @@
   <dt><strong><%= model_class.human_attribute_name(:dob) %>:</strong></dt>
   <dd><%= @profile.dob %></dd>
   <dt><strong><%= model_class.human_attribute_name(:street) %>:</strong></dt>
-  <dd><%= @profile.street %></dd>
+  <dd><%= @profile.street %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:city) %>:</strong></dt>
-  <dd><%= @profile.city %></dd>
+  <dd><%= @profile.city.try(:name) %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:state) %>:</strong></dt>
-  <dd><%= @profile.state %></dd>
+  <dd><%= @profile.state.try(:name) %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
-  <dd><%= @profile.country %></dd>
+  <dd><%= @profile.country.try(:name) %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:height) %>:</strong></dt>
-  <dd><%= @profile.height %></dd>
+  <dd><%= @profile.height %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:weight) %>:</strong></dt>
-  <dd><%= @profile.weight %></dd>
+  <dd><%= @profile.weight %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @profile.user_id %></dd>
+  <dd><%= @profile.user_id %>&nbsp;</dd>
 </dl>
 
 <div class="form-actions">

@@ -67,5 +67,7 @@ Cricketism::Application.routes.draw do
   get 'dashboard' => 'dashboard#index'
   get 'about_us' => 'home#about_us'
   get 'contact_us' => 'home#contact_us'
+  get 'states/:id' => 'address#states'
+  get 'cities/:id' => 'address#cities'
   root :to => "home#index"
 end

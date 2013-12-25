@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20131224093348) do
 
   create_table "cities", force: true do |t|
     t.integer  "country_id",            null: false
-    t.integer  "region_id",             null: false
-    t.integer  "dma_id"
+    t.integer  "dma_id",                null: false
+    t.integer  "state_id"
     t.string   "name",       limit: 45, null: false
     t.float    "latitude",              null: false
     t.float    "longitude",             null: false
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.integer  "city_id"
   end
 
-  create_table "regions", force: true do |t|
+  create_table "states", force: true do |t|
     t.integer  "country_id",            null: false
     t.string   "name",       limit: 45, null: false
     t.string   "code",       limit: 8,  null: false

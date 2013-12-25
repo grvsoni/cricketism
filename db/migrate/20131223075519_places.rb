@@ -18,7 +18,7 @@ class Places < ActiveRecord::Migration
       t.string :comment, :limit => 255
     end
 
-    create_table :regions do |t|
+    create_table :states do |t|
        t.references :country, :null => false
        t.string :name, :limit => 45, :null => false
        t.string :code, :limit => 8, :null => false
@@ -27,8 +27,8 @@ class Places < ActiveRecord::Migration
 
     create_table :cities do |t|
       t.references :country, :null => false
-      t.references :region, :null => false
       t.integer :dma_id
+      t.references :state, :null => false
       t.string :name, :limit => 45, :null => false
       t.float :latitude, :null => false
       t.float :longitude, :null => false
@@ -42,7 +42,7 @@ class Places < ActiveRecord::Migration
     execute "LOAD DATA INFILE '#{Rails.root}/db/Countries.txt' INTO TABLE countries
       FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
 
-    execute "LOAD DATA INFILE '#{Rails.root}/db/Regions.txt' INTO TABLE regions
+    execute "LOAD DATA INFILE '#{Rails.root}/db/Regions.txt' INTO TABLE states
       FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
 
     execute "LOAD DATA INFILE '#{Rails.root}/db/Cities.txt' INTO TABLE cities
@@ -52,7 +52,7 @@ class Places < ActiveRecord::Migration
       t.timestamps
     end
 
-    change_table :regions do |t|
+    change_table :states do |t|
       t.timestamps
     end
 
@@ -63,7 +63,7 @@ class Places < ActiveRecord::Migration
 
   def self.down
     drop_table :countries
-    drop_table :regions
+    drop_table :states
     drop_table :cities
   end
 end

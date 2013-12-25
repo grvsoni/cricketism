@@ -44,19 +44,19 @@
       <div class="control-group">
         <%= f.label :country_id, "Country", :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name) %>
+          <%= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name, @profile.country.try(:id)), {:prompt => "Select Country..."}, {:onchange => "set_states();"} %>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :state, :class => 'control-label' %>
+        <%= f.label :state_id, :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :state, :class => 'text_field' %>
+          <%= f.select :state_id, options_from_collection_for_select(@profile.states, :id, :name, @profile.state.try(:id)), {:prompt => "Select State..."}, {:onchange => "set_cities();"} %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :city, :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :city, :class => 'text_field' %>
+          <%= f.select :city_id, options_from_collection_for_select(@profile.cities, :id, :name, @profile.city.try(:id)), {:prompt => "Select City..."} %>
         </div>
       </div>
       <div class="control-group">
@@ -71,6 +71,10 @@
           <%= f.text_field :weight, :class => 'text_field' %>
         </div>
       </div>
+      <div class="field">
+    <%= f.label :country_code %><br />
+    <%= f.country_select :country_code, {priority: %w(US CA), prompt: 'Please select a country'} %>
+  </div>
       <%= f.hidden_field :user_id, :class => 'text_field' %>
       
       <div class="form-actions">
