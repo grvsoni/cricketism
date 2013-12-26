@@ -1,0 +1,27 @@
+<div id="state_wrapper">
+  <% parent_country ||= params[:parent_country] %>
+  <% country = Country.find_by_id(parent_country) %>
+  <% if country.nil? %>
+    <em>Please select a country above</em>
+  <% elsif country.states.blank? %>
+    <em>No state found in above country</em>
+  <% elsif country.states %>
+    <%= select_tag(:state_id, options_for_select([['Please select a state...','']]+country.states.map{|r|[r.name, r.id]}, @profile.state_id ), {:name => 'profile[state_id]', :id => "profile_state_id"}) %>
+  <% else %>
+    <%= text_field(:profile, :state_id) %>
+  <% end %>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('select#profile_state_id').change(function(){
+        city_wrapper = $('#city_wrapper');
+        $('select', city_wrapper).attr('disabled', true);
+        state = $('select#profile_state_id').val();
+        url = "/cities/"+state;
+        city_wrapper.load(url);
+      });
+    });
+  </script>
+</div>
+
+

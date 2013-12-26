@@ -52,4 +52,3 @@ gem 'twitter-bootstrap-rails'
 gem "tabs_on_rails"
 gem 'jquery-datatables-rails'
 gem 'geocoder'
-gem 'carmen-rails', '~> 1.0.0', github: 'jim/carmen-rails'

@@ -42,21 +42,21 @@
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :country_id, "Country", :class => 'control-label' %>
+        <%= f.label :country, "Country", :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name, @profile.country.try(:id)), {:prompt => "Select Country..."}, {:onchange => "set_states();"} %>
+          <%= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name, @profile.country.try(:id)), {:prompt => "Select State..."} %>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :state_id, :class => 'control-label' %>
+        <%= f.label :state, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :state_id, options_from_collection_for_select(@profile.states, :id, :name, @profile.state.try(:id)), {:prompt => "Select State..."}, {:onchange => "set_cities();"} %>
+          <%= render "shared/state_select", :parent_country => f.object.country %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :city, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :city_id, options_from_collection_for_select(@profile.cities, :id, :name, @profile.city.try(:id)), {:prompt => "Select City..."} %>
+          <%= render "shared/city_select", :parent_region => f.object.state %>
         </div>
       </div>
       <div class="control-group">
@@ -71,10 +71,7 @@
           <%= f.text_field :weight, :class => 'text_field' %>
         </div>
       </div>
-      <div class="field">
-    <%= f.label :country_code %><br />
-    <%= f.country_select :country_code, {priority: %w(US CA), prompt: 'Please select a country'} %>
-  </div>
+
       <%= f.hidden_field :user_id, :class => 'text_field' %>
       
       <div class="form-actions">
@@ -85,3 +82,5 @@
     </div>
   </div>
 <% end %>
+
+<%= javascript_include_tag "address" %>

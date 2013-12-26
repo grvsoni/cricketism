@@ -1,0 +1,13 @@
+<div id="city_wrapper">
+  <% parent_region ||= params[:parent_region] %>
+  <% state = State.find_by_id(parent_region) %>
+  <% if state.nil? %>
+    <em>Please select a state above</em>
+  <% elsif state.cities.blank? %>
+    <em>No city found in above state</em>
+  <% elsif state.cities.present? %>
+    <%= select_tag(:city_id, options_for_select([['Please select a city...','']]+state.cities.map{|r|[r.name, r.id]}, @profile.city_id ), {:name => 'profile[city_id]'}) %>
+  <% else %>
+    <%= text_field(:profile, :city_id) %>
+  <% end %>
+</div>
