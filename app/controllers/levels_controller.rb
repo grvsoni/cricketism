@@ -70,6 +70,6 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-      params.require(:level).permit(:level)
+      params.require(:level).permit(:level, :user_id)
     end
 end

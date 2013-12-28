@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131224093348) do
+ActiveRecord::Schema.define(version: 20131228080904) do
 
   create_table "cities", force: true do |t|
     t.integer  "country_id",            null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.string   "code",       limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "cities", ["name"], name: "index_cities_on_name", using: :btree
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "user_id"
   end
 
   create_table "countries", force: true do |t|
@@ -67,12 +69,14 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "levels", force: true do |t|
     t.string   "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "match_types", force: true do |t|
@@ -90,6 +94,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.boolean  "last_man_bat"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "profiles", force: true do |t|
@@ -111,6 +116,19 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.integer  "city_id"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "login_role", default: true
+  end
+
+  create_table "roles_users", id: false, force: true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
   create_table "states", force: true do |t|
     t.integer  "country_id",            null: false
     t.string   "name",       limit: 45, null: false
@@ -118,6 +136,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.string   "adm1code",   limit: 4,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
@@ -142,6 +161,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.integer  "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -155,6 +175,7 @@ ActiveRecord::Schema.define(version: 20131224093348) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
 end

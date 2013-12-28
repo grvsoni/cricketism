@@ -1,0 +1,17 @@
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header">Quick links</li>
+    <%= tabs_tag :builder => MenuTabBuilder, :namespace => :subnav do |tab| %>
+      <%= tab.clubs 'Manage Clubs', clubs_path %>
+      <%= tab.venues 'Manage Venues', venues_path %>
+      <%= tab.players 'Manage Players', "#" %>
+      <%= tab.officials 'Manage Officials', "#" %>
+      <%= tab.fixtures 'Manage Fixtures', "#" %>
+      <%= tab.match_types 'Manage Match Types', match_types_path %>
+      <% if current_user.present? && current_user.has_role?(Role.find_by_name("Admin")) %>
+        <%= tab.users 'Manage User', users_path %>
+        <%= tab.roles 'Manage Role', roles_path %>
+      <% end %>
+    <% end %>
+  </ul>
+</div><!--/.well -->

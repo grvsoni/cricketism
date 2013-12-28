@@ -10,8 +10,9 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li>
+          <%= link_to "My Account", edit_user_path(current_user) %>
           <% if current_user.profile.present? %>
-            <%= link_to "Profile", edit_profile_path(current_user.profile) %>
+            <%= link_to "Profile", edit_profile_path(current_user.profile.id) %>
           <% else %>
             <%= link_to "Profile", new_profile_path %>
           <% end %>

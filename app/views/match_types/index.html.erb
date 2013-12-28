@@ -17,6 +17,7 @@
       <th><%= model_class.human_attribute_name(:dismiss_on_wicket) %></th>
       <th><%= model_class.human_attribute_name(:wicket_value) %></th>
       <th><%= model_class.human_attribute_name(:last_man_bat) %></th>
+      <th>Admin</th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -36,7 +37,8 @@
         <td><%= match_type.dismiss_on_wicket %></td>
         <td><%= match_type.wicket_value %></td>
         <td><%= match_type.last_man_bat %></td>
-        <td><%=l match_type.created_at %></td>
+        <td><%= match_type.user.name %></td>
+        <td><%= match_type.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_match_type_path(match_type), :class => 'btn btn-mini' %>

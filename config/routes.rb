@@ -1,4 +1,6 @@
 Cricketism::Application.routes.draw do
+  resources :roles
+
   resources :match_types
 
   resources :venues
@@ -10,6 +12,10 @@ Cricketism::Application.routes.draw do
   resources :profiles
 
   devise_for :users
+  scope "/admin" do
+    resources :users
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -73,6 +73,6 @@ class MatchTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_type_params
-      params.require(:match_type).permit(:name, :player_count, :max_over_batting, :max_run_batting, :max_over_bowling, :innings, :balls_per_over, :rebowl_noball, :noball_runs, :dismiss_on_wicket, :wicket_value, :last_man_bat)
+      params.require(:match_type).permit(:name, :player_count, :max_over_batting, :max_run_batting, :max_over_bowling, :innings, :balls_per_over, :rebowl_noball, :noball_runs, :dismiss_on_wicket, :wicket_value, :last_man_bat, :user_id)
     end
 end

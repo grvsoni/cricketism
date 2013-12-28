@@ -30,6 +30,9 @@
       <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm Password" %>
     </div>
   </div>
+
+  <%= render "users/roles", :f => f %>
+  
   <hr/>
   <div class="form-group">
     <label class = "col-sm-2 control-label"></label>

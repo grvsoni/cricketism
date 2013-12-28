@@ -1,0 +1,15 @@
+<b>Please take permissions seriously</b>.  The "admin" role means a person
+can stop Production game servers with the click of a button.
+<br/><br/>
+<% roles = Role.login_roles %>
+<% if current_user.present? && current_user.has_role?(Role.find_by_name("Admin"))%>
+  <% roles = Role.all %>
+<% end %>
+<% roles.each do |role| %>
+  <div class="checkbox roles">
+    <label>
+      <span><%= check_box_tag "user[role_ids][]", role.id, @user.has_role?(role), :id => "user_role_#{role.id}" %> <%= role.name %></span>
+    </label>        
+  </div>
+<% end %>
+<div class="clearfix"></div>

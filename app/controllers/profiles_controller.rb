@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    @profile = Profile.find_by_user_id(current_user.id)
+    @profile = Profile.find_by_id(params[:id])
   end
 
   # POST /profiles
