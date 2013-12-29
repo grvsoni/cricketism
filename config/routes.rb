@@ -1,4 +1,6 @@
 Cricketism::Application.routes.draw do
+  resources :teams
+
   resources :roles
 
   resources :match_types
@@ -7,13 +9,21 @@ Cricketism::Application.routes.draw do
 
   resources :levels
 
-  resources :clubs
-
   resources :profiles
+
+  resources :clubs
 
   devise_for :users
   scope "/admin" do
-    resources :users
+    resources :users do
+      resources :teams
+      resources :clubs do
+        resources :teams do 
+          resources :players do
+          end
+        end
+      end
+    end
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

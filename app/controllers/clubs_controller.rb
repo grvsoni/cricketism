@@ -1,5 +1,6 @@
 class ClubsController < ApplicationController
-  layout "dashboard"
+  layout :clubs_layout
+
   set_tab :dashboard
   set_tab :clubs, :subnav
 
@@ -8,7 +9,11 @@ class ClubsController < ApplicationController
   # GET /clubs
   # GET /clubs.json
   def index
-    @clubs = Club.all
+    if params[:user_id].present?
+      @clubs = Club.where("user_id = #{params[:user_id]}")
+    else
+      @clubs = Club.all
+    end
   end
 
   # GET /clubs/1
@@ -74,5 +79,9 @@ class ClubsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
       params.require(:club).permit(:name, :war_cry, :status, :city, :state, :is_verified, :is_registered, :verification_date, :registration_date, :country, :level_id, :logo, :user_id)
+    end
+
+    def clubs_layout
+      current_user.is_admin? ? "dashboard" : "club"
     end
 end

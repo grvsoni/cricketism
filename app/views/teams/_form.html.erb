@@ -1,0 +1,29 @@
+<%= form_for @team, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= render "shared/error_messages", :target => @team %>  
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :club_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :club_id, 
+                   options_from_collection_for_select(Club.where("user_id = #{current_user.id}"), :id, :name, @team.club.try(:id)),
+                   {:prompt => "Select Club..."} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :active, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :active %>
+    </div>
+  </div>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                teams_path, :class => 'btn' %>
+  </div>
+<% end %>

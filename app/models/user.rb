@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     roles.include?(role)
   end
 
+  def is_admin?
+    roles.include?(Role.find_by_name("Admin"))
+  end
+
   def set_user_roles
     if self.role_ids.present?
       roles.destroy_all

@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    authorize! :manage, @user
   end
 
   # PATCH/PUT /users/1
