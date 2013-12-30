@@ -3,6 +3,8 @@
     <li class="nav-header">Quick links</li>
     <%= tabs_tag :builder => MenuTabBuilder, :namespace => :subnav do |tab| %>
       <%= tab.clubs 'Manage Clubs', clubs_path %>
+      <%= tab.teams 'Manage Teams', teams_path %>
+      <%= tab.players 'Manage Players', players_path %>
       <%= tab.venues 'Manage Venues', venues_path %>
       <%= tab.officials 'Manage Officials', "#" %>
       <%= tab.fixtures 'Manage Fixtures', "#" %>

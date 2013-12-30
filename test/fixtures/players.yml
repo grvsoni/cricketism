@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  batting_hand: MyString
+  bowling_hand: MyString
+  skill: MyString
+  batting_style: MyString
+  bowling_style: MyString
+  is_wicketkeeper: false
+
+two:
+  user_id: 1
+  batting_hand: MyString
+  bowling_hand: MyString
+  skill: MyString
+  batting_style: MyString
+  bowling_style: MyString
+  is_wicketkeeper: false

@@ -1,4 +1,6 @@
 Cricketism::Application.routes.draw do
+  resources :players
+
   resources :teams
 
   resources :roles

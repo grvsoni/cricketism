@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  layout "club"
+  layout "dashboard"
   
   set_tab :dashboard
   set_tab :teams, :subnav

@@ -10,7 +10,7 @@
     <%= f.label :club_id, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :club_id, 
-                   options_from_collection_for_select(Club.where("user_id = #{current_user.id}"), :id, :name, @team.club.try(:id)),
+                   options_from_collection_for_select(Club.where("user_id = #{@team.user.id}"), :id, :name, @team.club.try(:id)),
                    {:prompt => "Select Club..."} %>
     </div>
   </div>
