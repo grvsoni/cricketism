@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   layout "dashboard"
-  before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :set_player, only: [:show, :update, :destroy]
 
   # GET /players
   # GET /players.json
@@ -21,19 +21,20 @@ class PlayersController < ApplicationController
 
   # GET /players/1/edit
   def edit
+    @player = Player.find(params[:id])
+    @user = @player.user
   end
 
   # POST /players
   # POST /players.json
   def create
-    @player = Player.new(player_params)
-
-    respond_to do |format|
-      if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @player }
+    @player = User.create(user_params)
+    respond_to do |format|                             
+      if @player && @player.errors.blank?
+        format.html { redirect_to users_path, notice: "#{Role.find(user_params[:role_ids][0]).name} was successfully updated." }
+        format.json { head :no_content }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'edit' }
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end
     end
@@ -42,6 +43,7 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1
   # PATCH/PUT /players/1.json
   def update
+    @user = @player.user
     respond_to do |format|
       if @player.update(player_params)
         format.html { redirect_to @player, notice: 'Player was successfully updated.' }
@@ -69,8 +71,11 @@ class PlayersController < ApplicationController
       @player = Player.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:user_id, :batting_hand, :bowling_hand, :skill, :batting_style, :bowling_style, :is_wicketkeeper)
+      params.require(:player).permit(:batting_hand, :bowling_hand, :skill, :batting_style, :bowling_style, :is_wicketkeeper, :club_id, :team_id, :user_id)
+    end
+
+    def user_params
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :user_id, :player_attributes => [:batting_hand, :bowling_hand, :skill, :batting_style, :bowling_style, :is_wicketkeeper, :club_id, :team_id], :role_ids => [])
     end
 end

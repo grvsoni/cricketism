@@ -1,0 +1,59 @@
+<div class="control-group">
+  <%= player.label :batting_hand, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.text_field :batting_hand, :class => 'text_field' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :bowling_hand, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.text_field :bowling_hand, :class => 'text_field' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :skill, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.text_field :skill, :class => 'text_field' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :batting_style, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.text_field :batting_style, :class => 'text_field' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :bowling_style, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.text_field :bowling_style, :class => 'text_field' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :is_wicketkeeper, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.text_field :is_wicketkeeper, :class => 'text_field' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :club_id, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.select :club_id, options_for_select(Club.all.map { |club| [club.name, club.id] }, @user.player.club_id), { :prompt => 'Select Club ...'} %>
+  </div>
+</div>
+<div class="control-group">
+  <%= player.label :team_id, :class => 'control-label' %>
+  <div class="controls">
+    <%= player.select :team_id,
+        (@user.player.team.present? ? options_for_select(@user.player.team.club.teams.map { |team| [team.name, team.id] }, @user.player.team_id) : []),
+        { :prompt => 'Select Team ...'} %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#player_club_id").change(function(){
+      alert(this.value);
+      $("#player_team_id").load("/clubs/"+this.value+"/teams.js")
+    });
+  });
+</script>

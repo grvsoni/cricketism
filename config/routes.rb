@@ -13,7 +13,10 @@ Cricketism::Application.routes.draw do
 
   resources :profiles
 
-  resources :clubs
+  resources :clubs do
+    resources :teams do 
+    end
+  end
 
   devise_for :users
   scope "/admin" do

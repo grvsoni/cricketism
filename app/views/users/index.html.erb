@@ -29,6 +29,8 @@
                       edit_user_path(user), :class => 'btn btn-mini' %>
           <%= link_to "Profile",
                       edit_profile_path(user.profile.id), :class => 'btn btn-mini' if user.profile.present? %>
+          <%= link_to "Player Profile",
+                      edit_player_path(user.player.id), :class => 'btn btn-mini' if user.player.present? && user.is_player? %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_path(user),
                       :method => :delete,

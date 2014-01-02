@@ -11,8 +11,14 @@ class TeamsController < ApplicationController
   def index
     if params[:user_id].present?
       @teams = Team.where("user_id = #{params[:user_id]}")
+    elsif params[:club_id].present?
+      @teams = Team.where("club_id = #{params[:club_id]}")
     else
       @teams = Team.all
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
