@@ -4,7 +4,7 @@
     <%= tabs_tag :builder => MenuTabBuilder, :namespace => :subnav do |tab| %>
       <%= tab.clubs 'Manage Clubs', user_clubs_path(current_user) %>
       <%= tab.teams 'Manage Teams', user_teams_path(current_user) %>
-      <%= tab.players 'Manage Players', "#" %>
+      <%= tab.players 'Manage Players', players_path %>
     <% end %>
   </ul>
 </div><!--/.well -->

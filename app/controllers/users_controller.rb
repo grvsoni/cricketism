@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  layout "dashboard"
+  layout :user_layout
+
   set_tab :dashboard
 
   before_action :set_club, only: [:edit, :update, :destroy]
@@ -30,7 +31,10 @@ class UsersController < ApplicationController
     
     respond_to do |format|                             
       if successfully_updated
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+        format.html do
+          flash[:notice] = 'User was successfully updated.'
+          redirect_to (current_user.is_admin? || current_user.is_club_admin?) ? users_path : edit_user_path(current_user.id)
+        end
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,5 +68,19 @@ class UsersController < ApplicationController
 
     def needs_password?(user, params)
       params[:password].present?
+    end
+
+    def user_layout
+      if params[:id].present?
+        if current_user.id == params[:id].to_i
+          set_tab :account, :subnav
+          "account"
+        else
+          "dashboard"
+        end
+      else
+        set_tab :account, :subnav
+        "account"
+      end
     end
 end

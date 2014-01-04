@@ -4,5 +4,5 @@ class Player < ActiveRecord::Base
   belongs_to :club
   belongs_to :profile
 
-  validates :skill, :batting_hand, :bowling_hand, :club, :team, :presence => true
+  validates :skill, :batting_hand, :bowling_hand, :user_id, :presence => true
 end

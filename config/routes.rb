@@ -1,4 +1,6 @@
 Cricketism::Application.routes.draw do
+  get 'players/existing_user' => 'players#existing_user'
+
   resources :players
 
   resources :teams

@@ -47,6 +47,9 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to "Create player with New User",
             new_player_path,
+            :class => 'btn btn-primary' %>
+<%= link_to "Create player with Existing User",
+            players_existing_user_path,
             :class => 'btn btn-primary' %>

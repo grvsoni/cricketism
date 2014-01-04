@@ -14,6 +14,7 @@
  *= require jquery-ui-1.10.2/themes/base/jquery.ui.datepicker
  *= require_tree .
  *= require bootstrap_and_overrides
+ *= require bootstrap-panel
  
  */
 
@@ -55,4 +56,8 @@
 .roles{
   float: left;
   min-width: 120px;
+}
+
+.checkbox label span{
+  vertical-align: middle;
 }

@@ -1,0 +1,20 @@
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header">My Account</li>
+    <%= tabs_tag :builder => MenuTabBuilder, :namespace => :subnav do |tab| %>
+      <%= tab.account 'Account', edit_user_path(current_user) %>
+      <% if current_user.profile.present? %>
+        <%= tab.profile "Profile", edit_profile_path(current_user.profile.id) %>
+      <% else %>
+        <%= tab.profile "Profile", new_profile_path %>
+      <% end %>
+      <% if current_user.is_player? %>
+        <% if current_user.player.present? %>
+          <%= tab.players 'Player Profile', edit_player_path(current_user.player) %>
+        <% else %>
+          <%= tab.players 'Player Profile', players_existing_user_path %>
+        <% end%>
+      <% end %>
+    <% end %>
+  </ul>
+</div><!--/.well -->

@@ -1,0 +1,33 @@
+<%- model_class = Player -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= form_for @player, :html => { :class => 'form-horizontal' } do |player| %>
+  <%= render "shared/error_messages", :target => @player %>
+
+    <div class="form-group">
+      <%= player.label :user_id, :class => 'control-label' %>
+      <div class="controls">
+        <% if current_user.is_admin? || current_user.is_club_admin? %>
+          <%= player.select :user_id, options_for_select(User.all_players.map { |user| [user.name, user.id] }, @player.user.try(:id)), { :prompt => 'Select User ...'} %>
+        <% else %>
+          <%= current_user.name %>
+          <%= player.hidden_field :user_id, :value => current_user.id %>
+        <% end %>
+      </div>
+    </div>
+  
+  <%= render "players/player_form", :player => player %>
+
+  <div class="form-actions">
+    <%= player.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#player_club_id").change(function(){
+      $("#player_team_id").load("/clubs/"+this.value+"/teams.js")
+    });
+  });
+</script>

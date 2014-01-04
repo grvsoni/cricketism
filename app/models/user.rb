@@ -18,6 +18,16 @@ class User < ActiveRecord::Base
 
   attr_accessor :role_ids
 
+  class << self
+    def all_players
+      Role.find_by_name("Player").users
+    end
+
+    def all_club_admins
+      Role.find_by_name("Club Admin").users
+    end
+  end
+
   def name
     profile.present? ? profile.fullname : username
   end

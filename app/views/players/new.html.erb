@@ -3,3 +3,10 @@
   <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
 <%= render :partial => 'form' %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#user_player_attributes_club_id").change(function(){
+      $("#user_player_attributes_team_id").load("/clubs/"+this.value+"/teams.js")
+    });
+  });
+</script>

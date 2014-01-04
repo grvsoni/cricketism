@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  layout "dashboard"
+  layout :player_layout
   before_action :set_player, only: [:show, :update, :destroy]
 
   # GET /players
@@ -17,6 +17,7 @@ class PlayersController < ApplicationController
   def new
     @user = User.new
     @user.build_player
+    @player = @user.player
   end
 
   # GET /players/1/edit
@@ -28,16 +29,34 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    @player = User.create(user_params)
-    respond_to do |format|                             
-      if @player && @player.errors.blank?
-        format.html { redirect_to users_path, notice: "#{Role.find(user_params[:role_ids][0]).name} was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
+    if params[:player].present?
+      @player = Player.create(player_params)
+      respond_to do |format|                             
+        if @player && @player.errors.blank?
+          format.html do
+            flash[:notice] = 'Player was successfully created.'
+            redirect_to (current_user.is_admin? || current_user.is_club_admin?) ? players_path : edit_player_path(current_user.player.id)
+          end
+          format.json { head :no_content }
+        else
+          format.html { render action: 'existing_user' }
+          format.json { render json: @player.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @user = User.create(user_params)
+      @player = @user.player
+      respond_to do |format|                             
+        if @user && @user.errors.blank?
+          format.html { redirect_to users_path, notice: "#{Role.find(user_params[:role_ids][0]).name} was successfully updated." }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
+    
   end
 
   # PATCH/PUT /players/1
@@ -46,7 +65,7 @@ class PlayersController < ApplicationController
     @user = @player.user
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to @player, notice: 'Player was successfully updated.' }
+        format.html { redirect_to edit_player_path(@user.player.id), notice: 'Player was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -65,6 +84,10 @@ class PlayersController < ApplicationController
     end
   end
 
+  def existing_user
+    @player = Player.new
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player
@@ -77,5 +100,19 @@ class PlayersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :user_id, :player_attributes => [:batting_hand, :bowling_hand, :skill, :batting_style, :bowling_style, :is_wicketkeeper, :club_id, :team_id], :role_ids => [])
+    end
+
+    def player_layout
+      if params[:id].present?
+        if current_user.player.present? && current_user.player.id == params[:id].to_i
+          set_tab :players, :subnav
+          "account"
+        else
+          "dashboard"
+        end
+      else
+        set_tab :players, :subnav
+        "dashboard"
+      end
     end
 end

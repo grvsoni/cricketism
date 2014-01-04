@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
-  layout "dashboard"
+  layout :profile_layout
+
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
@@ -30,7 +31,10 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html do 
+          flash[:notice] = 'Profile was successfully created.'
+          redirect_to (current_user.is_admin? || current_user.is_club_admin?) ? users_path : edit_profile_path(current_user.profile.id)
+        end
         format.json { render action: 'show', status: :created, location: @profile }
       else
         format.html { render action: 'new' }
@@ -44,7 +48,10 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html do
+          flash[:notice] = 'Profile was successfully updated.'
+          redirect_to (current_user.is_admin? || current_user.is_club_admin?) ? users_path : edit_profile_path(current_user.profile.id)
+        end
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -72,5 +79,19 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:avatar, :firstname, :lastname, :dob, :street, :city_id, :state_id, :country_id, :height, :weight, :user_id)
+    end
+
+    def profile_layout
+      if params[:id].present?
+        if current_user.profile.present? && current_user.profile.id == params[:id].to_i
+          set_tab :profile, :subnav
+          "account"
+        else
+          "dashboard"
+        end
+      else
+        set_tab :profile, :subnav
+        "account"
+      end
     end
 end

@@ -8,7 +8,7 @@ can stop Production game servers with the click of a button.
 <% roles.each do |role| %>
   <div class="checkbox roles">
     <label>
-      <span><%= check_box_tag "user[role_ids][]", role.id, @user.has_role?(role), :id => "user_role_#{role.id}" %> <%= role.name %></span>
+      <span><%= radio_button_tag "user[role_ids][]", role.id, @user.has_role?(role), :id => "user_role_#{role.id}" %><span class="value"> <%= role.name %></span></span>
     </label>        
   </div>
 <% end %>
