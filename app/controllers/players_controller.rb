@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all
+    @players = current_user.is_club_admin? ? current_user.players : Player.all
   end
 
   # GET /players/1

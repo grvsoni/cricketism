@@ -2,6 +2,7 @@ class Club < ActiveRecord::Base
   belongs_to :level
   belongs_to :user
   has_many :teams
+  has_many :players
   validates :name, :city, :state, :country, :presence => true
   validates :name, :uniqueness => true
 

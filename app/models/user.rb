@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_one :player, :dependent => :destroy
   has_and_belongs_to_many :roles
   belongs_to :user
+  has_many :clubs
+  has_many :players, :through => :clubs
 
   before_save :set_user_roles
 
