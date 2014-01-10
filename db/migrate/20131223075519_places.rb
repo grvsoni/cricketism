@@ -39,14 +39,14 @@ class Places < ActiveRecord::Migration
     add_index :cities, :name
 
 
-    execute "LOAD DATA INFILE '#{Rails.root}/db/Countries.txt' INTO TABLE countries
-      FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
+    # execute "LOAD DATA INFILE '#{Rails.root}/db/Countries.txt' INTO TABLE countries
+    #   FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
 
-    execute "LOAD DATA INFILE '#{Rails.root}/db/Regions.txt' INTO TABLE states
-      FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
+    # execute "LOAD DATA INFILE '#{Rails.root}/db/Regions.txt' INTO TABLE states
+    #   FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
 
-    execute "LOAD DATA INFILE '#{Rails.root}/db/Cities.txt' INTO TABLE cities
-      FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
+    # execute "LOAD DATA INFILE '#{Rails.root}/db/Cities.txt' INTO TABLE cities
+    #   FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
 
     change_table :countries do |t|
       t.timestamps
