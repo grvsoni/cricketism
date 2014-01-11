@@ -5,6 +5,18 @@ class UsersController < ApplicationController
 
   before_action :set_club, only: [:edit, :update, :destroy]
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.create(user_params.merge({ :confirmation_token => nil, 
+                                            :confirmed_at => Time.now, 
+                                            :user_id => current_user.id 
+                                          }))
+    redirect_to users_path
+  end
+
   def index
     set_tab :users, :subnav
     @users = User.all
