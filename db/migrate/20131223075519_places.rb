@@ -46,7 +46,7 @@ class Places < ActiveRecord::Migration
       FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
 
     execute "LOAD DATA INFILE '#{Rails.root}/db/Cities.txt' INTO TABLE cities
-      FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\r\n';"
+      FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n';"
 
     change_table :countries do |t|
       t.timestamps
