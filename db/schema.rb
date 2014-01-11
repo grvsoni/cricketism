@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20131230080521) do
 
   create_table "cities", force: true do |t|
     t.integer  "country_id",            null: false
-    t.integer  "dma_id"
-    t.integer  "state_id",              null: false
+    t.integer  "dma_id",                null: false
+    t.integer  "state_id"
     t.string   "name",       limit: 45, null: false
     t.float    "latitude",              null: false
     t.float    "longitude",             null: false
