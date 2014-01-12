@@ -9,9 +9,15 @@
   <div class="control-group">
     <%= f.label :club_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :club_id, 
+      <% if current_user.is_admin? %>
+        <%= f.select :club_id, 
+                   options_from_collection_for_select(Club.all, :id, :name, @team.club.try(:id)),
+                   {:prompt => "Select Club..."} %>
+      <% else %>
+        <%= f.select :club_id, 
                    options_from_collection_for_select(Club.where("user_id = #{@team.user.id}"), :id, :name, @team.club.try(:id)),
                    {:prompt => "Select Club..."} %>
+      <% end %>
     </div>
   </div>
   <div class="control-group">
