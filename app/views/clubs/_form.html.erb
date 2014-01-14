@@ -83,7 +83,20 @@
                          :class => 'text_field datepicker' %>
       </div>
     </div>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+    <% if current_user.is_admin? %>
+      <div class="control-group">
+        <%= f.label :user_id, "Club Admin", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :user_id, 
+                       options_from_collection_for_select(User.club_admins, :id, :name),
+                       {:prompt => "Select Club Admin..."} %>
+        </div>
+      </div>
+    <% else %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
+    
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

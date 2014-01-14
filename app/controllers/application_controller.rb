@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  rescue_from CanCan::AccessDenied, with: :deny_access
   
   protected
 
@@ -21,5 +23,10 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource_or_scope)
     dashboard_path
+  end
+
+  def deny_access
+    flash[:error] = "You are not authorized to access this page."
+    redirect_to dashboard_path
   end
 end

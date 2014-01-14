@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
+    puts "current_user >>>>>>> #{current_user.reload.players}"
     @players = current_user.is_club_admin? ? current_user.players : Player.all
   end
 
@@ -44,6 +45,7 @@ class PlayersController < ApplicationController
         end
       end
     else
+      puts ">>>>>>>> via club admin...."
       @user = User.create(user_params)
       @player = @user.player
       respond_to do |format|                             

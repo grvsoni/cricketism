@@ -20,9 +20,9 @@
         <td><%= link_to team.id, team_path(team) %></td>
         <td><%= team.name %></td>
         <td><%= team.club.name %></td>
-        <td><%= team.user.name %></td>
         <td><%= team.active %></td>
         <td><%= team.created_at %></td>
+        <td><%= team.user.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_team_path(team), :class => 'btn btn-mini' %>

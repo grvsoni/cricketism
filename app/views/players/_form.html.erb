@@ -32,6 +32,7 @@
             <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm Password" %>
           </div>
         </div>
+        <%= f.hidden_field(:user_id, :value => current_user.id) if current_user.is_admin? || current_user.is_club_admin? %>
         <%= f.hidden_field :role, :value => Role.find_by_name("Player").id, :name => "user[role_ids][]" %>
     </div>
   </div>

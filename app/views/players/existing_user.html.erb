@@ -9,7 +9,7 @@
       <%= player.label :user_id, :class => 'control-label' %>
       <div class="controls">
         <% if current_user.is_admin? || current_user.is_club_admin? %>
-          <%= player.select :user_id, options_for_select(User.all_players.map { |user| [user.name, user.id] }, @player.user.try(:id)), { :prompt => 'Select User ...'} %>
+          <%= player.select :user_id, options_for_select(User.players.map { |user| [user.name, user.id] }, @player.user.try(:id)), { :prompt => 'Select User ...'} %>
         <% else %>
           <%= current_user.name %>
           <%= player.hidden_field :user_id, :value => current_user.id %>

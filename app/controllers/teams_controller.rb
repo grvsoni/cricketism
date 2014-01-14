@@ -29,8 +29,14 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    params[:team] = params
-    @team = Team.new(team_params)
+    if current_user.is_admin? && Team.all.blank?
+      flash_error_and_redirect_to_dashboard
+    elsif current_user.is_club_admin? && Team.where("user_id = #{current_user.id}").blank?
+      flash_error_and_redirect_to_dashboard
+    else
+      params[:team] = params
+      @team = Team.new(team_params)
+    end
   end
 
   # GET /teams/1/edit
@@ -89,5 +95,10 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:name, :user_id, :club_id, :active)
+    end
+
+    def flash_error_and_redirect_to_dashboard
+      flash[:error] = "No Clubs found on the system, please add clubs first."
+      redirect_to dashboard_path
     end
 end

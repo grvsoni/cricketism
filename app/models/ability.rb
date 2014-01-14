@@ -30,12 +30,16 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     if user.has_role?(Role.find_by_name("Admin"))
       can :manage, :all 
-    else
+    elsif user.has_role?(Role.find_by_name("Club Admin"))
       can :manage, User, :id => user.id
+      can :manage, User, :user_id => user.id
       can :manage, Venue, :user_id => user.id
       can :manage, Club, :user_id => user.id
-      can :manage, MatchType, :user_id => user.id
+      can :manage, Profile, :user_id => user.id
+    else
+      can :manage, User, :id => user.id
       can :manage, Profile, :user_id => user.id
     end
+    can :read, :all
   end
 end

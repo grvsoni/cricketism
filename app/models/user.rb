@@ -21,11 +21,11 @@ class User < ActiveRecord::Base
   attr_accessor :role_ids
 
   class << self
-    def all_players
+    def players
       Role.find_by_name("Player").users
     end
 
-    def all_club_admins
+    def club_admins
       Role.find_by_name("Club Admin").users
     end
   end
