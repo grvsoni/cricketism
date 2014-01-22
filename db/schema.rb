@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230080521) do
+ActiveRecord::Schema.define(version: 20140122071413) do
 
   create_table "cities", force: true do |t|
     t.integer  "country_id",            null: false
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20131230080521) do
   end
 
   add_index "cities", ["name"], name: "index_cities_on_name", using: :btree
+
+  create_table "club_requests", force: true do |t|
+    t.integer  "user_id"
+    t.string   "club_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -97,6 +104,14 @@ ActiveRecord::Schema.define(version: 20131230080521) do
     t.integer  "user_id"
   end
 
+  create_table "organizations", force: true do |t|
+    t.string   "name"
+    t.boolean  "is_active"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "players", force: true do |t|
     t.integer  "user_id"
     t.integer  "club_id"
@@ -143,6 +158,13 @@ ActiveRecord::Schema.define(version: 20131230080521) do
     t.integer "user_id"
   end
 
+  create_table "sponsors", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "states", force: true do |t|
     t.integer  "country_id",            null: false
     t.string   "name",       limit: 45, null: false
@@ -158,6 +180,15 @@ ActiveRecord::Schema.define(version: 20131230080521) do
     t.integer  "user_id"
     t.integer  "club_id"
     t.boolean  "active",     default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tournaments", force: true do |t|
+    t.string   "name"
+    t.integer  "match_type_id"
+    t.integer  "level_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

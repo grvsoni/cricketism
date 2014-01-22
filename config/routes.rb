@@ -1,4 +1,10 @@
 Cricketism::Application.routes.draw do
+  resources :tournaments
+
+  resources :sponsors
+
+  resources :organizations
+
   get 'players/existing_user' => 'players#existing_user'
 
   resources :players

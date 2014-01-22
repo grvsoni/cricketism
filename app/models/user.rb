@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   belongs_to :user
   has_many :clubs
   has_many :players, :through => :clubs
+  has_many :club_requests
 
   before_save :set_user_roles
 
@@ -72,6 +73,10 @@ class User < ActiveRecord::Base
 
   def is_groundsman?
     roles.include?(Role.find_by_name("Groundsman"))
+  end
+
+  def is_organizer?
+    roles.include?(Role.find_by_name("Organizer"))
   end
 
   def set_user_roles
