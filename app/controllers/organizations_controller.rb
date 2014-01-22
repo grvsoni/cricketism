@@ -1,11 +1,17 @@
 class OrganizationsController < ApplicationController
+  load_and_authorize_resource
+  
   layout "dashboard"
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+    if params[:user_id].present?
+      @organizations = Organization.where("user_id = #{params[:user_id]}")
+    else
+      @organizations = Organization.all
+    end
   end
 
   # GET /organizations/1
@@ -70,6 +76,6 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :is_active)
+      params.require(:organization).permit(:name, :is_active, :user_id)
     end
 end

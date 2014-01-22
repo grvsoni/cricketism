@@ -38,6 +38,14 @@ Cricketism::Application.routes.draw do
       end
     end
   end
+
+  scope "/organizer" do
+    resources :users do
+      resources :tournaments
+      resources :sponsors
+      resources :organizations
+    end
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

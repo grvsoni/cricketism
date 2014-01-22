@@ -12,7 +12,8 @@
       <%= f.text_field :is_active, :class => 'text_field' %>
     </div>
   </div>
-  <%= f.hidden_field :user_id, :class => 'text_field' %>
+  <%= f.hidden_field :user_id, :class => 'text_field', :value => current_user.id %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

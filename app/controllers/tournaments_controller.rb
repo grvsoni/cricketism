@@ -1,11 +1,17 @@
 class TournamentsController < ApplicationController
+  load_and_authorize_resource
+  
   layout "dashboard"
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
 
   # GET /tournaments
   # GET /tournaments.json
   def index
-    @tournaments = Tournament.all
+    if params[:user_id].present?
+      @tournaments = Tournament.where("user_id = #{params[:user_id]}")
+    else
+      @tournaments = Tournament.all
+    end
   end
 
   # GET /tournaments/1

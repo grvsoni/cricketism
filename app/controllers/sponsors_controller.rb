@@ -1,11 +1,17 @@
 class SponsorsController < ApplicationController
+  load_and_authorize_resource
+  
   layout "dashboard"
   before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
 
   # GET /sponsors
   # GET /sponsors.json
   def index
-    @sponsors = Sponsor.all
+    if params[:user_id].present?
+      @sponsors = Sponsor.where("user_id = #{params[:user_id]}")
+    else
+      @sponsors = Sponsor.all
+    end
   end
 
   # GET /sponsors/1

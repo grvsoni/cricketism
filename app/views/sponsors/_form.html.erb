@@ -11,6 +11,7 @@
       <%= f.text_field :user_id, :class => 'text_field' %>
     </div>
   </div>
+  <%= f.hidden_field :user_id, :class => 'text_field', :value => current_user.id %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
