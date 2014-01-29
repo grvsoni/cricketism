@@ -12,7 +12,8 @@ Role.find_or_create_by({:name => "Club Admin", :login_role => true})
 Role.find_or_create_by({:name => "Official", :login_role => true})
 Role.find_or_create_by({:name => "Groundsman", :login_role => true})
 Role.find_or_create_by({:name => "Umpire", :login_role => true})
-user = User.create({
+Role.find_or_create_by({:name => "Organizer", :login_role => true})
+user = User.find_or_create_by_username({
                       "username"=>"someone",
                       "email"=>"someone@gmail.com",
                       "password"=>"changeme",

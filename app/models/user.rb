@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :clubs
   has_many :players, :through => :clubs
   has_many :club_requests
+  has_many :sponsors
+  has_many :organizations
 
   before_save :set_user_roles
 
