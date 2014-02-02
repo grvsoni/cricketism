@@ -3,14 +3,19 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @organization.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:is_active) %>:</strong></dt>
-  <dd><%= @organization.is_active %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @organization.user_id %></dd>
-</dl>
+<div class="row">
+  <div class="span2">
+    <%= image_tag @organization.logo(:large), :class => "img-thumbnail" %>
+  </div> 
+  <div class="span7">
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+      <dd><%= @organization.name %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:is_active) %>:</strong></dt>
+      <dd><%= @organization.is_active %></dd>
+    </dl>
+  </div>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

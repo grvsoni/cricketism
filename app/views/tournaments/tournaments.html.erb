@@ -1,0 +1,16 @@
+<% @tournaments.each do |tournament| %>
+  <div class="well pull-left" style="width:160px; margin-right:15px; padding-left:10px; min-height:225px;">
+    <%= link_to((image_tag tournament.logo.url(:large), :class => "img-thumbnail"), tournament_path(tournament)) %>
+    <div class="media-body">
+      <h4 class="media-heading"><center><%= tournament.name %></center></h4>
+      <p>
+        <i>
+          By 
+          <% tournament.sponsors.each do |sponsor| %>
+            <span class="label label-primary"><%= sponsor.name %></span>
+          <% end %>
+        </i>
+      </p>
+    </div>
+  </div>
+<% end %> 

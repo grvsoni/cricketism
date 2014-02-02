@@ -7,11 +7,15 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @tournament.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:match_type_id) %>:</strong></dt>
-  <dd><%= @tournament.match_type_id %></dd>
+  <dd><%= @tournament.match_type.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:level_id) %>:</strong></dt>
-  <dd><%= @tournament.level_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @tournament.user_id %></dd>
+  <dd><%= @tournament.level.level %></dd>
+  <dt><strong>Sponsors:</strong></dt>
+  <dd>
+    <% @tournament.sponsors.each do |sponsor| %>
+      <span class="label label-primary"><%= sponsor.name %></span>
+    <% end %>
+  </dd>
 </dl>
 
 <div class="form-actions">

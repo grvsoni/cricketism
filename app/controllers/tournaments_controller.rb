@@ -1,4 +1,7 @@
 class TournamentsController < ApplicationController
+  set_tab :dashboard
+  set_tab :tournaments, :subnav
+
   load_and_authorize_resource
   
   layout "dashboard"
@@ -11,6 +14,10 @@ class TournamentsController < ApplicationController
       @tournaments = Tournament.where("user_id = #{params[:user_id]}")
     else
       @tournaments = Tournament.all
+      respond_to do |format|
+        format.html { render :tournaments }
+        format.json { render action: 'show', status: :created, location: @tournament }
+      end
     end
   end
 
@@ -76,6 +83,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name, :match_type_id, :level_id, :user_id)
+      params.require(:tournament).permit(:name, :match_type_id, :level_id, :user_id, :logo, :sponsor_ids => [])
     end
 end

@@ -1,23 +1,51 @@
 <%= form_for @tournament, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+  <div class="row">
+    <div class="span2">
+      <div class="control-group">
+        <%= f.label :logo, image_tag(@tournament.logo.url(:large), :class => "img-thumbnail"), :class => 'control-label' %>
+      </div>
+    </div>
+    <div class="span6">
+      <%= render "shared/error_messages", :target => @tournament %>
+      <div class="control-group">
+        <%= f.label :logo, "Tournament Logo", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.file_field :logo %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :match_type_id, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :match_type_id, 
+                       options_from_collection_for_select(MatchType.all, :id, :name, @tournament.match_type.try(:id)),
+                       {:prompt => "Select Match Type..."} %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :level_id, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :level_id, 
+                       options_from_collection_for_select(Level.all, :id, :level, @tournament.level.try(:id)),
+                       {:prompt => "Select Level..."} %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :sponsors, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :sponsor_ids, 
+                       options_from_collection_for_select(Sponsor.all, :id, :name, @tournament.sponsors.map{|sponsor| sponsor.id }),
+                       {}, { :multiple => true, :size => 5 } %>
+        </div>
+      </div>
+      <%= f.hidden_field :user_id, :class => 'text_field', :value => current_user.id %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :match_type_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :match_type_id, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :level_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :level_id, :class => 'text_field' %>
-    </div>
-  </div>
-  <%= f.hidden_field :user_id, :class => 'text_field', :value => current_user.id %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
