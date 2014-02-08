@@ -54,6 +54,6 @@ gem 'twitter-bootstrap-rails'
 gem "tabs_on_rails"
 gem 'jquery-datatables-rails'
 gem 'geocoder'
-
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'ckeditor'  

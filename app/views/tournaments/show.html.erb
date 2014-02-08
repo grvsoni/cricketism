@@ -1,22 +1,76 @@
-<%- model_class = Tournament -%>
+<% content_for "social" do %>
+  <div style="margin-top:30px;">
+    <%= image_tag "social.png" %>
+  </div>
+<% end %>
+
+<% content_for "side_bar" do %>
+  <article class="tournament-sidebar">
+    <!-- Signup -->
+    <div id="signup">
+      <center><a class="btn btn-primary btn-lg" role="button" style="height:50px;font-size:22px;">Register Your Team Now!</a></center>
+    </div>
+
+    <!-- Pricing -->
+    <div id="pricing-block" class="greyed">
+      <h4>INR <%= @tournament.fees %></h4>
+      Per Team
+    </div>
+
+    <!-- Schedule -->
+    <div id="schedule-duration">
+      <h4>DURATION</h4>
+      <%= pluralize(@tournament.duration, "Week") %>
+    </div>
+
+    <div id="schedule-dates" class="greyed">
+      <h4>DATES</h4>
+      <%= @tournament.start_date %> to <%= @tournament.end_date %>
+    </div>
+    
+
+    <!-- Event Details -->
+    <div id="schedule-dates">
+      <h4>LEVEL</h4>
+      <%= @tournament.level.level %>
+    </div>
+
+    <div id="schedule-dates" class="greyed">
+      <h4>VENUES</h4>
+      <%= @tournament.venue.name %><br/>
+      <%= @tournament.venue.address %>
+      <hr/>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@tournament.venue.latitude}%2C#{@tournament.venue.longitude}" %>
+    </div>
+
+    <div id="schedule-dates">
+      <h4>CONTACT US</h4>
+      <%= mail_to @tournament.user.email %>
+    </div>
+
+    <!-- Sponsors -->
+    <div class="sponsors" class="greyed">
+      <h4>SPONSORED BY</h4>
+      <% @tournament.sponsors.each do |sponsor| %>
+        <%= image_tag(sponsor.logo.url(:thumb), :alt => sponsor.id) %><hr/>
+      <% end %>
+    </div>
+  </article>
+<% end %>
+
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h2><%= @tournament.name %></h2>
+  <small>
+    <i>
+      <strong>Level:</strong>
+      <%= @tournament.level.level %>
+    </i>
+  </small>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @tournament.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:match_type_id) %>:</strong></dt>
-  <dd><%= @tournament.match_type.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:level_id) %>:</strong></dt>
-  <dd><%= @tournament.level.level %></dd>
-  <dt><strong>Sponsors:</strong></dt>
-  <dd>
-    <% @tournament.sponsors.each do |sponsor| %>
-      <span class="label label-primary"><%= sponsor.name %></span>
-    <% end %>
-  </dd>
-</dl>
+<div style="border:1px solid #dadada;padding:10px;margin-top:-10px;">
+  <%= raw @tournament.description %>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

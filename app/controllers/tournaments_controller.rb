@@ -24,6 +24,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
+    render :layout => "tournament"
   end
 
   # GET /tournaments/new
@@ -83,6 +84,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name, :match_type_id, :level_id, :user_id, :logo, :sponsor_ids => [])
+      params.require(:tournament).permit(:name, :match_type_id, :level_id, :user_id, :logo, :venue_id, :description, :fees, :duration, :start_date, :start_time, :end_date, :end_time, :sponsor_ids => [])
     end
 end

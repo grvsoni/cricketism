@@ -1,4 +1,7 @@
 class SponsorsController < ApplicationController
+  set_tab :dashboard
+  set_tab :sponsors, :subnav
+
   load_and_authorize_resource
   
   layout "dashboard"

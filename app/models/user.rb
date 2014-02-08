@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :club_requests
   has_many :sponsors
   has_many :organizations
+  has_many :venue
 
   before_save :set_user_roles
 

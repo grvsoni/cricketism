@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   layout "dashboard"
+  
   set_tab :dashboard
   set_tab :venues, :subnav
 
@@ -8,7 +9,11 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+    if params[:user_id].present?
+      @venues = Venue.where("user_id = #{params[:user_id]}")
+    else
+      @venues = Venue.all
+    end
   end
 
   # GET /venues/1

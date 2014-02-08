@@ -34,6 +34,7 @@ class Ability
       can :manage, Organization, :user_id => user.id
       can :manage, Sponsor, :user_id => user.id
       can :manage, Tournament, :user_id => user.id
+      can :manage, Venue, :user_id => user.id
     elsif user.has_role?(Role.find_by_name("Club Admin"))
       can :manage, User, :id => user.id
       can :manage, User, :user_id => user.id

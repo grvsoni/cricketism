@@ -1,4 +1,7 @@
 class OrganizationsController < ApplicationController
+  set_tab :dashboard
+  set_tab :organizations, :subnav
+  
   load_and_authorize_resource
   
   layout "dashboard"

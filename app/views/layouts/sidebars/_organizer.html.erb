@@ -2,9 +2,10 @@
   <ul class="nav nav-list">
     <li class="nav-header">Quick links</li>
     <%= tabs_tag :builder => MenuTabBuilder, :namespace => :subnav do |tab| %>
-      <%= tab.clubs 'Manage Tournaments', user_tournaments_path(current_user) %>
-      <%= tab.clubs 'Manage Organizations', user_organizations_path(current_user) %>
-      <%= tab.clubs 'Manage Sponsors', user_sponsors_path(current_user) %>
+      <%= tab.tournaments 'Manage Tournaments', user_tournaments_path(current_user) %>
+      <%= tab.organizations 'Manage Organizations', user_organizations_path(current_user) %>
+      <%= tab.sponsors 'Manage Sponsors', user_sponsors_path(current_user) %>
+      <%= tab.venues 'Manage Venues', user_venues_path(current_user) %>
     <% end %>
   </ul>
 </div>

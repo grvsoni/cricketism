@@ -14,6 +14,7 @@
 //= require jquery-ui-1.10.2/ui/jquery-ui
 //= require jquery-ui-1.10.2/ui/jquery.ui.datepicker
 //= require jquery_ujs
+//= require ckeditor/init
 //= require twitter/bootstrap
 //= require turbolinks
 //= require dataTables/jquery.dataTables

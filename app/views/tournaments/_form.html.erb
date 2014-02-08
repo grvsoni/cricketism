@@ -1,51 +1,83 @@
 <%= form_for @tournament, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="row">
-    <div class="span2">
-      <div class="control-group">
-        <%= f.label :logo, image_tag(@tournament.logo.url(:large), :class => "img-thumbnail"), :class => 'control-label' %>
-      </div>
-    </div>
-    <div class="span6">
-      <%= render "shared/error_messages", :target => @tournament %>
-      <div class="control-group">
-        <%= f.label :logo, "Tournament Logo", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.file_field :logo %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :name, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :name, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :match_type_id, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.select :match_type_id, 
-                       options_from_collection_for_select(MatchType.all, :id, :name, @tournament.match_type.try(:id)),
-                       {:prompt => "Select Match Type..."} %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :level_id, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.select :level_id, 
-                       options_from_collection_for_select(Level.all, :id, :level, @tournament.level.try(:id)),
-                       {:prompt => "Select Level..."} %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :sponsors, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.select :sponsor_ids, 
-                       options_from_collection_for_select(Sponsor.all, :id, :name, @tournament.sponsors.map{|sponsor| sponsor.id }),
-                       {}, { :multiple => true, :size => 5 } %>
-        </div>
-      </div>
-      <%= f.hidden_field :user_id, :class => 'text_field', :value => current_user.id %>
+    
+  <%= render "shared/error_messages", :target => @tournament %>
+
+  <div class="control-group">
+    <%= f.label :logo, "Tournament Logo", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.label :logo, image_tag(@tournament.logo.url(:large), :class => "img-thumbnail") %>
+      <%= f.file_field :logo %>
     </div>
   </div>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :match_type_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :match_type_id, 
+                   options_from_collection_for_select(MatchType.all, :id, :name, @tournament.match_type.try(:id)),
+                   {:prompt => "Select Match Type..."} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :level_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :level_id, 
+                   options_from_collection_for_select(Level.all, :id, :level, @tournament.level.try(:id)),
+                   {:prompt => "Select Level..."} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :fees, "Fee [in INR]", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :fees, :size => "5", :class => "numeric" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :duration, "Tournament Duration(in Weeks)",:class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :duration, :class => "numeric" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :start_date, "Tournament Start Date",:class => 'control-label' %>
+    <div class="controls">
+      <%= date_select :tournament, :start_date %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :end_date, "Tournament End Date", :class => 'control-label' %>
+    <div class="controls">
+      <%= date_select :tournament, :end_date %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sponsors, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :sponsor_ids, 
+                   options_from_collection_for_select(Sponsor.all, :id, :name, @tournament.sponsors.map{|sponsor| sponsor.id }),
+                   {}, { :multiple => true, :size => 5 } %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :venue_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :venue_id, 
+                   options_from_collection_for_select(Venue.all, :id, :name, @tournament.venue.try(:id)),
+                   {:prompt => "Select Venue..."} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.cktext_area :description , :rows => 3 , :id=>"editor_#{@tournament.id}", :class => "ckeditor" %>
+    </div>
+  </div>
+  <%= f.hidden_field :user_id, :class => 'text_field', :value => current_user.id %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
@@ -53,3 +85,8 @@
                 tournaments_path, :class => 'btn' %>
   </div>
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+     $(".numeric").numeric();
+  });
+</script>

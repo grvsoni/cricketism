@@ -61,3 +61,17 @@
 .checkbox label span{
   vertical-align: middle;
 }
+
+.greyed{
+  background-color: #efefef;
+}
+
+.tournament-sidebar{
+  margin-top: 50px;
+  border: 1px solid #dadada;
+}
+
+.sponsors, #pricing-block, #signup, #schedule-dates, #schedule-duration {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 10px;
+}

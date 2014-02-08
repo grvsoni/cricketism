@@ -1,4 +1,5 @@
 Cricketism::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   resources :tournaments
 
   resources :sponsors
@@ -44,6 +45,7 @@ Cricketism::Application.routes.draw do
       resources :tournaments
       resources :sponsors
       resources :organizations
+      resources :venues
     end
   end
   
