@@ -52,7 +52,7 @@
     <div class="sponsors" class="greyed">
       <h4>SPONSORED BY</h4>
       <% @tournament.sponsors.each do |sponsor| %>
-        <%= image_tag(sponsor.logo.url(:thumb), :alt => sponsor.id) %><hr/>
+        <%= image_tag(sponsor.logo.url(:large), :alt => sponsor.id, :class => "img-thumbnail") %>
       <% end %>
     </div>
   </article>

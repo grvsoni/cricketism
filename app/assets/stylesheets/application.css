@@ -75,3 +75,7 @@
   border-bottom: 1px solid #ccc;
   padding: 10px 10px;
 }
+
+.sponsors > img {
+  margin-bottom: 5px;
+}
